@@ -573,3 +573,39 @@ with left_col:
 
         if total_scheduled:
             st.success(f"Scheduled {total_scheduled} messages from {len(uploaded_files)} file(s).")
+
+            # your existing imports
+            from apscheduler.schedulers.background import BackgroundScheduler
+            import time
+            import os
+            import atexit
+            from flask import Flask
+
+
+            # your existing functions and job logic
+            def send_whatsapp_message():
+                print("Sending WhatsApp message...")
+
+
+            # create scheduler and add your existing jobs
+            scheduler = BackgroundScheduler()
+            scheduler.add_job(send_whatsapp_message, "interval", minutes=1)
+            scheduler.start()
+
+            # shut down gracefully
+            atexit.register(lambda: scheduler.shutdown())
+
+            # Flask app to keep Render process alive
+            app = Flask(__name__)
+
+
+            @app.route("/")
+            def home():
+                return "Scheduler is running on Render!"
+
+
+            # run flask server (MUST be last!)
+            if __name__ == "__main__":
+                port = int(os.environ.get("PORT", 5000))  # Render provides PORT
+                app.run(host="0.0.0.0", port=port)
+
