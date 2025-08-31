@@ -6,6 +6,7 @@ aiosignal==1.4.0
 altair==4.2.2
 archspec==0.2.5
 attrs==25.3.0
+apscheduler==3.10.4
 bcrypt==4.3.0
 blinker
 boltons==23.0.0
